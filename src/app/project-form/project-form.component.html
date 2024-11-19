@@ -1,0 +1,59 @@
+<h1>Project Management</h1>
+
+<div class="project-container">
+    <label for="projectName">Project Name:</label>
+    <input type="text" id="projectName" class="input" placeholder="Enter project name" [(ngModel)]="projectName" />
+
+    <label for="projectDescription">Project Description:</label>
+    <textarea id="projectDescription" placeholder="Enter project description" [(ngModel)]="projectDescription" class="input"></textarea>
+    <button class="btn" (click)="addProject()">add project</button>
+</div>
+
+<div class="project-details">
+    <h2>Project Details</h2>
+    <p><strong>Project Name:</strong></p>
+    <p> {{ project.name }}</p>
+    <p><strong>Project Description:</strong></p>
+    <p>{{ project.description || 'No description provided' }}</p>
+  </div>
+
+<h2>Team Members</h2>
+
+<div class="newMember-container">
+    <label for="newMemberName">Add New Team Member:</label>
+    <input type="text" id="newMemberName" class="input" placeholder="Name" [(ngModel)]="newMemberName" />
+    
+    <label for="newMemberRole">Role:</label>
+    <select id="newMemberRole" class="input" [(ngModel)]="newMemberRole">
+        <option value="" disabled>Select Role</option>
+        @for (role of roles; track role) {
+
+            <option [value]="role">{{role}}</option>
+        }
+    </select>
+
+
+    <button class="btn" (click)="addMember()">Add Member</button>
+</div>
+
+
+@if (project.teamMembers.length > 0) {
+<ul class="members-container">
+    @for (member of project.teamMembers; track member.id) {
+    <li class="member">
+        <span>{{ member.name }} ({{ member.role }})</span>
+        <div class="availability-container">
+            <label for="checkbox">Available:</label>
+            <input type="checkbox" [(ngModel)]="member.availability" (change)="toggleAvailability(member)
+            "/>
+        </div>
+        @if (member.isAvailable) {
+
+            <p>This member is available from: {{member.isAvailable | date: 'short'}}</p>
+        }
+        <button class="btn" (click)="removeMember(member.id)">Remove</button>
+    </li>
+    }
+</ul>
+<button class="btn" (click)="clearMembers()">Clear All Members</button>
+}
