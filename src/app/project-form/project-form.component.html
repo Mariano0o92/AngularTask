@@ -10,11 +10,14 @@
 </div>
 
 <div class="project-details">
-    <h2>Project Details</h2>
-    <p><strong>Project Name:</strong></p>
-    <p> {{ project.name }}</p>
-    <p><strong>Project Description:</strong></p>
-    <p>{{ project.description || 'No description provided' }}</p>
+    @if (project.name) {
+        <h2>Project Details</h2>
+        <p><strong>Project Name:</strong></p>
+        <p> {{ project.name }}</p>
+        <p><strong>Project Description:</strong></p>
+        <p>{{ project.description || 'No description provided' }}</p>
+        
+    }
   </div>
 
 <h2>Team Members</h2>

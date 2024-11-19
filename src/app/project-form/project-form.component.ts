@@ -36,7 +36,7 @@ export class ProjectFormComponent {
   projectDescription = '';
   newMemberName = '';
   newMemberRole = '';
-  newMemberAvailability = false;
+  // newMemberAvailability = false;
 
   addProject() {
     if (!this.projectName) {
@@ -58,12 +58,12 @@ export class ProjectFormComponent {
       id: Math.floor(Math.random() * 1000),
       name: this.newMemberName,
       role: this.newMemberRole,
-      availability: this.newMemberAvailability,
+      availability: false
     });
 
     this.newMemberName = '';
     this.newMemberRole = '';
-    this.newMemberAvailability = false;
+    // this.newMemberAvailability = false;
   }
 
   removeMember(memberId: number) {
